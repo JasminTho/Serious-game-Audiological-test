@@ -1,35 +1,40 @@
 README - English
-# Serious Game with Playful Elements - Audiological Hearing Test
+# Serious Game with Playful Elements : Audiology Hearing Test
 
-This program demonstrates a classical hearing test. Based on the results of the hearing test, it is possible to assess whether the patient has a hearing loss.
+This program demonstrates a standard hearing test. Based on the results of the hearing test, it can be used to assess whether a patient has hearing loss.
 
 ## Motivation
-Hearing loss is a major problem affecting many people. The diagnosis of this condition is done by doctors and audiologists. Hearing loss is, especially in older people, often a gradual process. Additionally, many people face psychological barriers when visiting a doctor. As a result, hearing loss is often diagnosed only when it is already at an advanced stage. As part of my training to become a data scientist, I am learning different skills such as Python, machine learning and SQL. Furthermore, I have gained basic knowledge in audiology through my previous work experience. Based on this, I aim to develop a simple hearing test that patients can use at home. This test includes a basic hearing threshold measurement using standard pure tones. In addition, the test should analyze the speech understanding using the Freiburger one- and two-syllable test. Finally, the program should run through a web interface, so that users can use this tool without installing additional software. The target group includes all individuals who want to check their hearing independently in a low-threshold and accessible manner.
+Hearing loss is a common problem that affects millions of people. The diagnosis of this condition is done by doctors and audiologists. Hearing loss often progresses gradually, especially in older adults. Additionally, many people avoid visiting a doctor due to psychological barriers. As a result, hearing loss is often diagnosed only when it is already at an advanced stage. As part of my training to become a data scientist, I am learning different skills such as Python, machine learning and SQL. Furthermore, I have gained basic knowledge in audiology through my previous work experience. Based on this, I aim to develop a simple at-home hearing test for patients. This test includes a basic hearing threshold measurement using standard pure tones. In addition, the test should analyze the speech understanding using the Freiburger one- and two-syllable test. Finally, the program should run via a web interface, allowing users to access the tool without installing additional software. The target audience includes anyone who wants to independently check their hearing in a simple and accessible way.
 
 ## Implemented functions
-- Audiological hearing test in the standard frequencies (125 - 8000 Hz) with increasing sound level.
-- The test results are currently displayed on the console. A graphical user interface to display the results as an audiogram is planned.
+- The main.py file has been implemented to control the program.
+- The program performs an audiological hearing test across standard frequencies (125-8000 Hz) with increasing sound levels.
+- A first version of the GUI has been implemented, featuring a fully functional pure tone average measurement.
 
 ## Next step
-- The program file audio.py will be implemented using an object-oriented approach.
-- Implementation of a main.py file, from which all submodules are executed.
-- Development of a graphical user interface via Tkinter, using English and German menus.
+- Complete the GUI in terms of:
+  - Continuous language setup.
+  - Temporarily disable the button for a few seconds to prevent multiple clicks per tone.
+  - Display measurement results on the GUI.
+  - Fix bugs to ensure the program restarts correctly.
+- Develop a program to plot the audiogram.
 
 ## Planned functions
-- Plot the audiological results as an audiogram.
-- Implementation of synthetic test data for training a machine learning algorithm in a database e.g. PostgreSQL or Excel. An option is provided to extend the dataset with free, available, anonymized audiological data.
-- Train the machine learning algorithm with the test to detect, based on the test results, whether a participant has a hearing loss.
-- Integration of a speech test e.g. the Freiburger one- and two-syllable test.
+- Implement synthetic test data for training a machine learning algorithm in a database such as PostgreSQL or in Excel. An option is provided to extend the dataset with free, available, anonymized audiological data.
+- Train a machine learning algorithm to detect hearing loss based on the test results.
+- Integrate a speech test, for example, the Freiburger one- and two-syllable test.
 - Build a level system for the game. The game mechanics are currently in the conceptual phase.
 - Build a web application.
 
 ## Installation
-The program runs on all common operating systems. To start the program, it is necessary to install Python 3.10 or higher.
-Additionally, the following modules are necessary:
+The program runs on all major operating systems (Windows, macOS, Linux). Ensure that Python 3.10 or higher is installed before running the program.
+The following Python modules are required:
+- json
 - numpy
 - sounddevice
 - threading
 - time
+- tkinter
 
 ## Planned structure of the program
 - main.py
@@ -48,8 +53,8 @@ Additionally, the following modules are necessary:
 The program is freely available. Feedback and suggestions are welcome.
 
 ## Disclaimer
-- Project idea and program code are from myself. The concept of this application is refined with the KI-tool ChatGPT. The project is supervised by a tutor of VelpTec edutainment.
-- This program is not a medical diagnosis tool and does not replace professional medical consultation.
+- The project idea and program code are my own. The concept of this application is refined using the AI tool ChatGPT. The project is supervised by a tutor of VelpTec edutainment.
+- This program is not a medical diagnostic tool and does not replace professional medical consultation.
 
 -------------------------------------------------------------------------------------------------------------------
 <br>
@@ -59,33 +64,37 @@ README - German
 Dieses Programm zeigt einen klassischen Hörtest. Anhand der Ergebnisse des Hörtests soll der Proband einschätzen, ob ein Hörverlust vorliegt.
 
 ## Motivation
-Hörverlust ist ein zentrales Problem vieler Menschen. Die Diagnose dieser Funktionsstörung erfolgt durch Ärzte und Audiologen. Ein Hörverlust ist jedoch, gerade bei älteren Patienten oftmals ein schleichender Prozess. Viele Menschen besitzen eine gewisse Hemmschwelle, wenn es darum geht zum Arzt zu gehen. Somit kann es passieren, dass der Hörverlust erst diagnostiziert wird, wenn der Hörverlust bereits weit fortgeschritten ist. Im Rahmen meiner Weiterbildung zum Data Scientist lerne ich u.a. Python, Machine Learning und SQL. Des Weiteren konnte ich in meinen bisherigen Berufserfahrungen Kenntnisse im Bereich der Audiologie sammeln. Mithilfe dieser Kenntnisse möchte ich einen einfachen Hörtest programmieren, den die Patienten schon zu Hause am PC durchführen können. Dieser Test soll zum einen einen einfachen Hörschwellentest mittels standardisierter Töne umfassen. Weitergehend wird das Sprachverstehen mittels Freiburger Einsilber- und Zweisilbertest gemessen. Das Programm soll auf einem Webinterface laufen, damit Patienten es ohne Installation von Programmen verwenden können. Zielgruppe sind alle Personen, die ihr Hörvermögen eigenständig und niedrigschwellig überprüfen möchten.
+Hörverlust ist ein zentrales Problem vieler Menschen. Die Diagnose dieser Funktionsstörung erfolgt durch Ärzte und Audiologen. Ein Hörverlust ist jedoch, besonders bei älteren Patienten, oftmals ein schleichender Prozess. Viele Menschen besitzen eine gewisse Hemmschwelle, wenn es darum geht, zum Arzt zu gehen. Somit wird der Hörverlust oft erst erkannt, wenn dieser bereits weit fortgeschritten ist. Im Rahmen meiner Weiterbildung zum Data Scientist lerne ich u.a. Python, Machine Learning und SQL. Des Weiteren konnte ich in meinen bisherigen Berufserfahrungen Kenntnisse im Bereich der Audiologie sammeln. Mithilfe dieser Kenntnisse möchte ich einen einfachen Hörtest programmieren, den die Patienten schon zu Hause am PC durchführen können. Dieser Test soll zum einen einen einfachen Hörschwellentest mittels standardisierter Tönen umfassen. Außerdem wird das Sprachverstehen mittels Freiburger Einsilber- und Zweisilbertest gemessen. Das Programm soll auf einem Webinterface laufen, damit Patienten es ohne Installation von Programmen verwenden können. Zielgruppe sind alle Personen, die ihr Hörvermögen eigenständig und auf einfache Weise überprüfen möchten.
 
 ## Implementierte Funktionen
-- Audiologischer Hörtest in den Standardfrequenzen (125 - 8000 Hz) mit Erhöhung des Lautpegels
-- Die Ergebnisse werden aktuell in der Konsole ausgegeben. Eine grafische Darstellung als Audiogramm ist geplant.
+- Die Datei main.py wurde zur Steuerung des Programms implementiert.
+- Audiologischer Hörtest in den Standardfrequenzen (125 - 8000 Hz) mit Erhöhung des Lautpegels.
+- Eine erste Version der GUI wurde programmiert und bietet eine voll funktionsfähige Reinton-Messung.
 
 ## Nächste Schritte
-- Die Programmdatei audio.py wird objektorientiert programmiert 
-- Implementierung einer main.py Datei, von der aus Unterprogramme gestartet werden
-- Entwicklung einer Benutzeroberfläche via Tkinter mit englischem und deutschem Menü
+- Fertigstellen der GUI in folgenden Punkten:
+    - Kontinuierliche Spracheinstellung.
+    - Zeitweises Deaktivieren des Buttons, um doppelte Mausklicks pro Ton zu verhindern.
+    - Darstellen der Messergebnisse in der GUI.
+    - Fehler beim erneuten Starten des Programms beheben.
+-  Audiologische Ergebnisse als Audiogramm darstellen.   
 
 ## Geplante Funktionen
-- Plotten der audiologischen Ergebnisse als Audiogramm
 - Implementierung von synthetischen Testdaten zum Trainieren des Machine-Learning-Algorithmus z. B. über PostgreSQL oder Excel, mit der Option zur späteren Erweiterung um frei verfügbare anonymisierte Audiologiedaten.
-- Trainieren eines Machine-Learning-Algorithmus, der anhand der Testergebnisse erkennen soll, ob ein Proband an einem Hörverlust leidet 
-- Einbettung des Freiburger Ein- und Zweisilber Tests 
+- Trainieren eines Machine-Learning-Algorithmus, der anhand der Testergebnisse erkennen soll, ob ein Proband an einem Hörverlust leidet. 
+- Einbettung des Freiburger Ein- und Zweisilbertests. 
 - Implementierung eines Levelsystems für das Spiel. Spielmechaniken wie ein Levelsystem sind geplant, befinden sich jedoch noch in der Konzeptionsphase.
-- Aufbau in einer Web-Applikation
+- Aufbau in einer Web-Applikation.
 
 ## Installation
-Das Programm läuft auf allen gängigen Betriebssystemen. Zum Starten des Programms wird Python 3.10 oder eine höhere Version benötigt
+Das Programm läuft auf allen gängigen Betriebssystemen. Zum Starten des Programms wird Python 3.10 oder eine höhere Version benötigt.
 Zudem sind folgende Module notwendig:
-- keyboard
+- json
 - numpy
 - sounddevice
 - threading
 - time
+- tkinter
 
 ## Geplanter Aufbau des Programms
 - main.py
@@ -101,9 +110,9 @@ Zudem sind folgende Module notwendig:
   - gui_webbased.py   
 
 ## Lizenz 
-Programm ist frei nutzbar. Feedback und Anregungen sind ausdrücklich erwünscht.
+Das Programm ist frei nutzbar. Feedback und Anregungen sind ausdrücklich erwünscht.
 
 ## Disclaimer
--	Projektidee und Programmcode stammen von mir, die konzeptionelle Entwicklung wurde mittels des KI-Tools ChatGPT verfeinert. Das Projekt wird von einem Tutor von VelpTec Edutainment betreut.
+-	Projektidee und Programmcode stammen von mir; die konzeptionelle Entwicklung wurde mittels des KI-Tools ChatGPT verfeinert. Das Projekt wird von einem Tutor von VelpTec Edutainment betreut.
 -	Dieses Projekt stellt kein medizinisches Diagnosetool dar und ersetzt keine fachärztliche Untersuchung oder Beratung.
 

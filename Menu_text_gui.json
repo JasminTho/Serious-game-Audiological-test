@@ -1,0 +1,16 @@
+{
+  "English":{
+	"start_menu": {
+		"title":"Serious Game - Hearing test",
+		"entry_text": "This is a classical hearing test. \nIf you hear a tone press the button.",
+		"button_text": "Start \nhearing test"
+	}
+   },
+  "German":{
+	"start_menu": {
+		"title":"Serious Game - Hörtest",
+		"entry_text": "Dies ist ein klassischer Hörtest. \nSobald sie den Ton hören, klicken sie auf die Schaltfläche.",
+		"button_text": "Starte \nHörtest"
+	}
+   }
+}
