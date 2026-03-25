@@ -4,13 +4,44 @@
 		"title":"Serious Game - Hearing test",
 		"entry_text": "This is a classical hearing test. \nIf you hear a tone press the button.",
 		"button_text": "Start \nhearing test"
+	},
+	"pure_tone_measurement":{
+		"entry_text": "Running pure tone measurement",
+		"button_text": "Tone \n heard"
+	},
+	"result":{
+		"entry_text": "Please press the button to start the test again",
+		"button_text": "Restart \nhearing test"
+	},
+	"audiogram":{
+    	"title": "Hearing Test",
+    	"x_label": "Frequencies in kHz",
+    	"y_label": "Hearing Level in dB",
+    	"date":"Date",
+    	"pta4_unavailable":"unpredictable"
 	}
+
    },
   "German":{
 	"start_menu": {
 		"title":"Serious Game - Hörtest",
-		"entry_text": "Dies ist ein klassischer Hörtest. \nSobald sie den Ton hören, klicken sie auf die Schaltfläche.",
+		"entry_text": "Dies ist ein klassischer Hörtest. \nSobald Sie den Ton hören, klicken sie auf die Schaltfläche.",
 		"button_text": "Starte \nHörtest"
+	},
+	"pure_tone_measurement":{
+		"entry_text": "Reinton Messung läuft",
+		"button_text": "Ton gehört"
+	},
+	"result":{
+		"entry_text": "Zum erneuten Starten bitte den Button drücken",
+		"button_text": "Wiederhole \nHörtest"
+	},
+	"audiogram":{
+    	"title": "Hörtest",
+    	"x_label": "Frequenzen in kHz",
+    	"y_label": "Hörpegel in dB",
+    	"date":"Datum",
+    	"pta4_unavailable":"nicht berechenbar"
 	}
    }
 }

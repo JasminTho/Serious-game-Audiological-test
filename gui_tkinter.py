@@ -1,34 +1,42 @@
 '''---------------------------------------------
-audiology.py
-This program generate a tkinter graphical user interface for the Hearing Test
+gui_tkinter.py
+This program generates a tkinter graphical user interface for the Hearing Test.
+It starts a pure tone measurement and gives the results in a separated plot
 
 User interaction and output messages are in English and German.
 Code and comments are written in English. 
 
 Author: JT
-Last modified: 2026-02-26
+Last modified: 2026-03-25
 ---------------------------------------------'''
 
-# Included modules
-from tkinter import Tk, Text, Label, WORD, Frame
-from tkinter import ttk
+# Imports
+from audio import HearingTest
+from audiogram import Audiogram
 from json import load
-from audio import Hearing_test
 import threading
+from tkinter import Tk, Text, Label, WORD, Frame, Button
+from tkinter import ttk
 
-class gui_Hearing_test:
+class HearingTestGUI:
     def __init__(self):
-        # Load of the menu text 
-        self.load_text_settup()
-        self.ht = Hearing_test()
-        
+        # Load all user interface texts from the JSON file
+        self.load_text_setup()
+        self.create_window()
+    
+    def create_window(self):
+        '''
+        Initialize core components
+        '''
+        self.ht = HearingTest()
+        self.language = 'English'
         self.window = Tk()
         
-        # Settings window
-        self.window.title(self.setup_text['English']['start_menu']['title'])
-        self.window.resizable(False, False)
+        # Configure main window
+        self.window.title(self.setup_text[self.language]['start_menu']['title'])
+        self.window.resizable(False, False)                 # Prevent resizing of the window
         
-        # size and position of the window
+        # Define window size and position
         self.window_width  = 350 
         window_height = 200
         screen_width = self.window.winfo_screenwidth()
@@ -36,30 +44,33 @@ class gui_Hearing_test:
         center_x = int(screen_width/2 - self.window_width / 2)
         center_y = int(screen_height/2 - window_height / 2)
 
-        self.window.geometry(f'{self.window_width}x{window_height}+{center_x}+{center_y}')
-        
+        self.window.geometry(f'{self.window_width}x{window_height}+{center_x}+{center_y}')      # Center the window on the screen
         self.window.config(bg = '#FAEBD7')
-        # Change to start window
+        
+        # Initialize start window
         self.start_window()
         
-        # start GUI
-        self.window.mainloop()
         
-    def load_text_settup(self): 
+    def load_text_setup(self): 
+        '''
+        Load the JSON File 'Menu_text_gui' to enable multi-language support
+        '''
         with open('Menu_text_gui.json', 'r', encoding = 'utf-8') as file:
             self.setup_text = load(file)
     
     def start_window(self):
-        initial_font =('Arial', 10)
-        self.phase_programm = 'start'
+        '''
+        Initialize the start screen of the GUI 
+        '''
+        initial_font = ('Arial', 10)
+        self.phase_program = 'start'
         # Widgets
         style = ttk.Style()
-        style.theme_use('clam')
-        style.configure("TButton", 
-                        font= initial_font,
-                        justify = 'center')  
-        self.bt_start_hearing_test = ttk.Button(self.window,
-                                       text = self.setup_text['English']['start_menu']['button_text'],
+        style.theme_use('clam') 
+        self.bt_hearing_test = Button(self.window,
+                                       text = self.setup_text[self.language]['start_menu']['button_text'],
+                                       font= initial_font,
+                                       justify = 'center',
                                        command = self.button_action)
         self.txt_user_information = Text(self.window,
                                     bg = '#FAEBD7',
@@ -68,17 +79,18 @@ class gui_Hearing_test:
                                     bd = 0,
                                     wrap = WORD)
         self.txt_user_information.tag_configure("center", justify="center")
-        self.txt_user_information.insert('end', self.setup_text['English']['start_menu']['entry_text'], 'center')
+        self.txt_user_information.insert('end', self.setup_text[self.language]['start_menu']['entry_text'], 'center')
         
         
-        # Set cb_language and lb_language in a frame, to put it close together in the window
+        # Group language selection in a frame
         self.frame = Frame(self.window,
                            bg = '#FAEBD7')
         self.cb_language = ttk.Combobox(self.frame,
                                         font = initial_font,
-                                        width = 10)
+                                        width = 10,
+                                        state = 'readonly')
         self.cb_language['values'] = ['English', 'German']
-        self.cb_language.set('English')
+        self.cb_language.set(self.language)
         
         self.lb_language = Label(self.frame,
                                  text = 'Language:',
@@ -87,7 +99,7 @@ class gui_Hearing_test:
                                  anchor = 'e')
         
         # Layout of widget
-        self.bt_start_hearing_test.grid(column = 0, columnspan= 3, row =2, pady = 10)
+        self.bt_hearing_test.grid(column = 0, columnspan= 3, row =2, pady = 10)
         self.txt_user_information.grid(column = 0, columnspan = 3, row =1, padx = 10, sticky = 'ew')
         self.frame.grid(column = 2, row = 0, pady = 5, padx = 5, sticky = 'e')
         self.lb_language.grid(column = 0, row =0, padx = 5)
@@ -98,55 +110,92 @@ class gui_Hearing_test:
         self.window.columnconfigure(2, weight=1)
         self.window.rowconfigure(1, weight=1) 
         self.window.rowconfigure(2, weight=0)
-        # Change of the Language
         
+        # Handle language change
         self.cb_language.bind("<<ComboboxSelected>>", self.language_change)
         
-    # Eventhandling
     def button_action(self):
-        if self.phase_programm == 'start':
+        '''
+        Managing of the event handling of the button.
+        This is based on the phase of the program.
+        '''
+        if self.phase_program == 'start':
             self.pure_tone_measurement()
-        elif self.phase_programm == 'pure_tone_measurement':
+        elif self.phase_program == 'pure_tone_measurement':
             self.ht.tone_heard = True
-            number_of_tones = len(self.ht.frequencies)
-            self.progressbar.step(100/number_of_tones)
-        elif self.phase_programm == 'result':
-            self.start_window()
-    
-    
+            self.bt_hearing_test.config(state = 'disabled')         # After the button was clicked, it is disabled for a few seconds to avoid double mouse clicks
+            self.window.after(500, lambda: self.bt_hearing_test.config(state = 'normal'))
+        elif self.phase_program == 'result':
+            self.new_start()
+
     def pure_tone_measurement(self):
-        self.phase_programm = 'pure_tone_measurement'
+        '''
+        Measurement of the pure tone threshold using the standard tones.
+        '''
+        self.phase_program = 'pure_tone_measurement'
         self.ht.program_active = True
-        self.lb_language.destroy()
-        self.cb_language.destroy()
+        self.frame.destroy()                            # The language frame is destroyed since the user can only change the language before starting the measurement
         self.progressbar = ttk.Progressbar(self.window,
-                                           length = self.window_width - 10)
+                                           length = self.window_width - 10,
+                                           mode='determinate')
         self.progressbar.grid(column = 0, columnspan= 3, row = 0)
-        self.txt_user_information.delete(1.0,'end') 
-        play_tone_thread = threading.Thread(target = self.play_tone, 
+        self.bt_hearing_test.config(text = self.setup_text[self.language][self.phase_program]['button_text'])
+        self.txt_user_information.delete(1.0,'end')
+        self.txt_user_information.insert('end', self.setup_text[self.language][self.phase_program]['entry_text'], 'center')
+        play_tone_thread = threading.Thread(target = self.play_tone,                    # Run hearing test in a separate thread to keep the GUI responsive
                                             daemon = True) 
         play_tone_thread.start()
  
     def language_change(self, event):
-        language = self.cb_language.get()
-        self.window.title(self.setup_text[language]['start_menu']['title'])
+        '''
+        Update GUI text when the user changes the language
+        '''
+        self.language = self.cb_language.get()
+        self.window.title(self.setup_text[self.language]['start_menu']['title'])
         self.txt_user_information.delete(1.0,'end')
-        self.txt_user_information.insert('end', self.setup_text[language]['start_menu']['entry_text'], 'center')
-        self.bt_start_hearing_test.config(text = self.setup_text[language]['start_menu']['button_text'])
+        self.txt_user_information.insert('end', self.setup_text[self.language]['start_menu']['entry_text'], 'center')
+        self.bt_hearing_test.config(text = self.setup_text[self.language]['start_menu']['button_text'])
     
     def play_tone(self):
-        # Start Hearing Test
-        self.ht.run_hearing_test()
-        self.show_results()
+        '''
+        Run the Hearing Test
+        '''
+        self.ht.run_hearing_test(self.update_progressbar)
+        self.window.after(0, self.show_results)
+    
+    def update_progressbar(self):
+        '''
+        Update the progress bar after each tested frequency
+        '''
+        progress_step = 100 / len(self.ht.frequencies)          # Calculate step size for each frequency
+        self.window.after(0, lambda: self.progressbar.step(progress_step))
     
     def show_results(self):
-        self.phase_programm = 'result'
-        print(self.ht.hearing_threshold)
-        
-        
+        '''
+        Show the result as a matplotlib plot file
+        '''
+        self.progressbar.destroy()
+        self.phase_program = 'result'
+        self.bt_hearing_test.config(text = self.setup_text[self.language][self.phase_program]['button_text'])
+        self.txt_user_information.delete(1.0,'end')
+        self.txt_user_information.insert('end', self.setup_text[self.language][self.phase_program]['entry_text'], 'center')
+        Audiogram(self.ht.hearing_threshold, self.language, self.setup_text)
+    
+    def new_start(self):
+        '''
+        Reset the GUI for a new test
+        '''
+        self.bt_hearing_test.destroy()
+        self.txt_user_information.destroy()
+        self.start_window()
+    
+    def run(self):
+        self.window.mainloop()
+    
 # Main
 if __name__ == '__main__':
-    gui_Hearing_test()
+    app = HearingTestGUI()
+    app.run()
 
 
     
