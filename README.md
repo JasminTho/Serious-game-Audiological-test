@@ -9,19 +9,22 @@ Hearing loss is a common problem that affects millions of people. The diagnosis 
 ## Implemented functions
 - The main.py file has been implemented to control the program.
 - The program performs an audiological hearing test across standard frequencies (125-8000 Hz) with increasing sound levels.
-- A first version of the GUI has been implemented, featuring a fully functional pure tone average measurement.
+- A GUI for the hearing test
+- Display hearing outcome in an audiogram
 
-## Next step
-- Complete the GUI in terms of:
-  - Continuous language setup.
-  - Temporarily disable the button for a few seconds to prevent multiple clicks per tone.
-  - Display measurement results on the GUI.
-  - Fix bugs to ensure the program restarts correctly.
-- Develop a program to plot the audiogram.
+## Screenshots
+
+### Hearing Test GUI
+<img src="images/gui_start.png" width="200"> | <img src="images/gui_pure_tone_measurement.png" width="200"> | <img src="images/gui_result.png" width="200">
+
+### Example Audiogram
+![Audiogram Output](images/audiogram.png)
+
+## Next steps
+- Generate synthetic dataset for training a machine learning algorithm
+- Develop, train and test of machine learning classifier
 
 ## Planned functions
-- Implement synthetic test data for training a machine learning algorithm in a database such as PostgreSQL or in Excel. An option is provided to extend the dataset with free, available, anonymized audiological data.
-- Train a machine learning algorithm to detect hearing loss based on the test results.
 - Integrate a speech test, for example, the Freiburger one- and two-syllable test.
 - Build a level system for the game. The game mechanics are currently in the conceptual phase.
 - Build a web application.
@@ -30,6 +33,7 @@ Hearing loss is a common problem that affects millions of people. The diagnosis 
 The program runs on all major operating systems (Windows, macOS, Linux). Ensure that Python 3.10 or higher is installed before running the program.
 The following Python modules are required:
 - json
+- matplotlib.pyplot
 - numpy
 - sounddevice
 - threading
@@ -69,19 +73,23 @@ Hörverlust ist ein zentrales Problem vieler Menschen. Die Diagnose dieser Funkt
 ## Implementierte Funktionen
 - Die Datei main.py wurde zur Steuerung des Programms implementiert.
 - Audiologischer Hörtest in den Standardfrequenzen (125 - 8000 Hz) mit Erhöhung des Lautpegels.
-- Eine erste Version der GUI wurde programmiert und bietet eine voll funktionsfähige Reinton-Messung.
+- Eine GUI für den Hörtest
+- Darstellung der Hörergebnis mittels Audiogramm
 
 ## Nächste Schritte
-- Fertigstellen der GUI in folgenden Punkten:
-    - Kontinuierliche Spracheinstellung.
-    - Zeitweises Deaktivieren des Buttons, um doppelte Mausklicks pro Ton zu verhindern.
-    - Darstellen der Messergebnisse in der GUI.
-    - Fehler beim erneuten Starten des Programms beheben.
--  Audiologische Ergebnisse als Audiogramm darstellen.   
+-  Implementierung von synthetischen Testdaten zum Trainieren des Machine-Learning-Algorithmus
+- Entwicklung, Training und Testung eines Machine Learning Klassifizierer
 
-## Geplante Funktionen
-- Implementierung von synthetischen Testdaten zum Trainieren des Machine-Learning-Algorithmus z. B. über PostgreSQL oder Excel, mit der Option zur späteren Erweiterung um frei verfügbare anonymisierte Audiologiedaten.
-- Trainieren eines Machine-Learning-Algorithmus, der anhand der Testergebnisse erkennen soll, ob ein Proband an einem Hörverlust leidet. 
+## Screenshots
+
+### Hearing Test GUI
+<img src="images/gui_start_de.png" width="200"> | <img src="images/gui_reintonmessung.png" width="200"> | <img src="images/gui_ergebnisse.png" width="200">
+
+### Example Audiogram
+![Audiogram Output](images/audiogramm.png)
+
+
+## Geplante Funktionen 
 - Einbettung des Freiburger Ein- und Zweisilbertests. 
 - Implementierung eines Levelsystems für das Spiel. Spielmechaniken wie ein Levelsystem sind geplant, befinden sich jedoch noch in der Konzeptionsphase.
 - Aufbau in einer Web-Applikation.
@@ -90,6 +98,7 @@ Hörverlust ist ein zentrales Problem vieler Menschen. Die Diagnose dieser Funkt
 Das Programm läuft auf allen gängigen Betriebssystemen. Zum Starten des Programms wird Python 3.10 oder eine höhere Version benötigt.
 Zudem sind folgende Module notwendig:
 - json
+- matplotlib.pyplot
 - numpy
 - sounddevice
 - threading
