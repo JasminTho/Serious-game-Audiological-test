@@ -15,7 +15,7 @@ Hearing loss is a common problem that affects millions of people. The diagnosis 
 ## Screenshots
 
 ### Hearing Test GUI
-<img src="images/gui_start.png" width="200"> | <img src="images/gui_pure_tone_measurement.png" width="200"> | <img src="images/gui_result.png" width="200">
+<img src="images/GUI_start.png" width="200"> | <img src="images/GUI_pure_tone_measurement.png" width="200"> | <img src="images/GUI_result.png" width="200">
 
 ### Example Audiogram
 ![Audiogram Output](images/audiogram.png)
@@ -82,10 +82,10 @@ Hörverlust ist ein zentrales Problem vieler Menschen. Die Diagnose dieser Funkt
 
 ## Screenshots
 
-### Hearing Test GUI
-<img src="images/gui_start_de.png" width="200"> | <img src="images/gui_reintonmessung.png" width="200"> | <img src="images/gui_ergebnisse.png" width="200">
+### Hörtest GUI
+<img src="images/GUI_Start_de.png" width="200"> | <img src="images/GUI_Reintonmessung.png" width="200"> | <img src="images/GUI_Ergebnisse.png" width="200">
 
-### Example Audiogram
+### Beispiel Audiogramm
 ![Audiogram Output](images/audiogramm.png)
 
 
