@@ -10,12 +10,13 @@ Hearing loss is a common problem that affects millions of people. The diagnosis 
 - The main.py file has been implemented to control the program.
 - The program performs an audiological hearing test across standard frequencies (125-8000 Hz) with increasing sound levels.
 - A GUI for the hearing test
-- Display hearing outcome in an audiogram
+- Display hearing outcome i
+n an audiogram
 
 ## Screenshots
 
 ### Hearing Test GUI
-<img src="images/GUI_start.png" width="200"> | <img src="images/GUI_pure_tone_measurement.png" width="200"> | <img src="images/GUI_result.png" width="200">
+<img src="images/GUI_start.png" width="200"> | <img src="images/GUI_pure_tone_measurement.png" width="200"> | <img src="images/Gui_result.png" width="200">
 
 ### Example Audiogram
 ![Audiogram Output](images/audiogram.png)
