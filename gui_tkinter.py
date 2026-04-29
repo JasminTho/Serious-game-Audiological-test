@@ -7,16 +7,19 @@ User interaction and output messages are in English and German.
 Code and comments are written in English. 
 
 Author: JT
-Last modified: 2026-03-25
+Last modified: 2026-04-28
 ---------------------------------------------'''
 
-# Imports
-from audio import HearingTest
-from audiogram import Audiogram
+# Inclusion
+# Included modules
 from json import load
 import threading
 from tkinter import Tk, Text, Label, WORD, Frame, Button
 from tkinter import ttk
+
+# Other programm files
+from audio import HearingTest
+from audiogram import Audiogram
 
 class HearingTestGUI:
     def __init__(self):
@@ -55,7 +58,7 @@ class HearingTestGUI:
         '''
         Load the JSON File 'Menu_text_gui' to enable multi-language support
         '''
-        with open('Menu_text_gui.json', 'r', encoding = 'utf-8') as file:
+        with open('config/Menu_text_gui.json', 'r', encoding = 'utf-8') as file:
             self.setup_text = load(file)
     
     def start_window(self):
@@ -179,7 +182,7 @@ class HearingTestGUI:
         self.bt_hearing_test.config(text = self.setup_text[self.language][self.phase_program]['button_text'])
         self.txt_user_information.delete(1.0,'end')
         self.txt_user_information.insert('end', self.setup_text[self.language][self.phase_program]['entry_text'], 'center')
-        Audiogram(self.ht.hearing_threshold, self.language, self.setup_text)
+        Audiogram(self.ht.hearing_threshold,  self.setup_text, self.language)
     
     def new_start(self):
         '''

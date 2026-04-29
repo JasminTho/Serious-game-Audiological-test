@@ -1,26 +1,32 @@
 '''---------------------------------------------
-audiology.py
-This program plots a audiogram based on the test result of the hearing test.
+audiogram.py
+This program plots an audiogram based on the test result of the hearing test.
 Further the pta4 level is evaluated if possible
 
 Code and comments are written in English. 
 
 Author: JT
-Last modified: 2026-03-25
+Last modified: 2026-04-28
 ---------------------------------------------'''
 
 # Imports
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+from json import load
 from time import localtime
+from train_predict_ml import TestPredictModel
+
 
 class Audiogram:
-    def __init__(self, hearing_threshold = None, language = 'English', setup_text= None): 
+    def __init__(self, hearing_threshold = None,  setup_text= None, language = 'English'): 
+        self.pdm = TestPredictModel()
         self.hearing_threshold = hearing_threshold
         self.language = language
         self.setup_text =  setup_text
-        self.hearing_outcome = list(self.hearing_threshold.values())
         self.x_ticks = [0.125, 0.250, 0.500, 0.750, 1, 1.5, 2, 3, 4, 6, 8]
+        self.hearing_outcome = list(self.hearing_threshold.iloc[0, 0:len(self.x_ticks)])
+
         self.init_figure()
     
     def init_figure(self):
@@ -30,6 +36,7 @@ class Audiogram:
                 gridspec_kw={'height_ratios':[0.5, 10, 0.5]},  # Relation between the subplots
                 constrained_layout=True  # automatic distance between title and text
         )
+        
         # Creation of several plots
         self.plot_header()
         self.plot_pure_tone()
@@ -56,7 +63,7 @@ class Audiogram:
         plt.subplot(3,1,2)
         # Handling of not heard frequencies
         for tone in range(11):
-            if self.hearing_outcome[tone] == 'not heard':
+            if self.hearing_outcome[tone] == 110 and self.hearing_threshold.iloc[0,tone+len(self.x_ticks)] == 1:
                 self.hearing_outcome[tone] = None                  
                 plt.text(self.x_ticks[tone],110,'\u2198', c='b')
         
@@ -89,22 +96,55 @@ class Audiogram:
         '''
         ax = plt.subplot(3,1,3)
         ax.axis('off')
-        rel_freq = (500, 1000, 2000, 4000)         # relevant tones for the pta4
+        rel_freq = (0.5, 1, 2, 4)         # relevant tones for the pta4
         '''
         Try to evaluate the mean, only possible, when all relevant frequencies were heard 
         by the user. Otherwise output is not calculatable
         '''
+
         try:
-            pure_tone_average = [self.hearing_threshold[k] for k in rel_freq]
+            pure_tone_average = [self.hearing_threshold[str(freq) + '_khz'] for freq in rel_freq]
             pta = np.mean(pure_tone_average)
-            ax.text(0, 0.5, 'PTA4 (0.5, 1, 2, 4 kHz): ' + str(pta) + ' dB')
+            self.hearing_threshold['PTA4'] = pta
+            str_pta = str(pta) + ' dB'
         except KeyError:
-            pta = self.setup_text[self.language]['audiogram']['pta4_unavailable']
-            ax.text(0, 0.5, 'PTA4 (0.5, 1, 2, 4 kHz): ' + str(pta))
-                                                                             
+            str_pta = self.setup_text[self.language]['audiogram']['pta4_unavailable']
+            self.hearing_threshold['PTA4'] = np.nan
+            
+        self.pdm.predict_hearing_loss(self.hearing_threshold)
+        prediction = str(self.pdm.prediction[0])    
+        str_hearing_loss = self.setup_text[self.language]['prediction_hearing_loss']['hearing_loss']
+        str_prediction = self.setup_text[self.language]['prediction_hearing_loss'][prediction]
+        ax.text(0, 0.5, f'PTA4 (0.5, 1, 2, 4 kHz): {str_pta}\
+                \n{str_hearing_loss}: {str_prediction}')
 # Main
 if __name__ == '__main__':
-    Audiogram()
+    hearing_threshold = pd.DataFrame([{'0.125_khz' : 0, 
+                                     '0.25_khz' : 0, 
+                                     '0.5_khz' : 5, 
+                                     '0.75_khz' : 0, 
+                                     '1_khz' : 0, 
+                                     '1.5_khz' : 0, 
+                                     '2_khz' : 0, 
+                                     '3_khz' : 0, 
+                                     '4_khz' : 0, 
+                                     '6_khz' : 0, 
+                                     '8_khz' : 0,
+                                     '0.125_flag' : 0, 
+                                     '0.25_flag' : 0, 
+                                     '0.5_flag' : 0, 
+                                     '0.75_flag' : 0, 
+                                     '1_flag' : 0, 
+                                     '1.5_flag' : 0, 
+                                     '2_flag' : 0, 
+                                     '3_flag' : 0, 
+                                     '4_flag' : 0, 
+                                     '6_flag' : 0, 
+                                     '8_flag' : 0}])
+    with open('config\Menu_text_gui.json', 'r', encoding = 'utf-8') as file:
+        setup_text = load(file)
+    Audiogram(hearing_threshold, setup_text)
+    
 
 
     

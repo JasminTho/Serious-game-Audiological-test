@@ -19,6 +19,15 @@
     	"y_label": "Hearing Level in dB",
     	"date":"Date",
     	"pta4_unavailable":"unpredictable"
+	},
+	"prediction_hearing_loss":{
+	"hearing_loss":"Hearing Ability",
+	"normal":"Normal Hearing",
+	"mild" : "Mild hearing loss",
+        "moderate" : "Moderate hearing loss",
+        "severe" : "Severe hearing loss",
+        "presbyakusis" : "Age-related hearing loss",
+        "surditas":"Profound hearing loss"
 	}
 
    },
@@ -42,6 +51,15 @@
     	"y_label": "Hörpegel in dB",
     	"date":"Datum",
     	"pta4_unavailable":"nicht berechenbar"
+	},
+	"prediction_hearing_loss":{
+	"hearing_loss":"Hörstatus",
+	"normal":"Normalhörend",
+	"mild" : "Leichter Hörverlust",
+        "moderate" : "Mittlerer Hörverlust",
+        "severe" : "Schwerer Hörverlust",
+        "presbyakusis" : "Hochtonverlust",
+        "surditas":"Hochgradiger Hörverlust"
 	}
    }
 }
