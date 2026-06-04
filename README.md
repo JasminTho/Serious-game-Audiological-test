@@ -1,6 +1,6 @@
 README - English
 # Serious Game with Playful Elements: Audiology Hearing Test
-Update: 2026-04-28
+Update: 2026-06-04
 
 This program demonstrates a standard hearing test. Based on the results of the hearing test, it can be used to assess whether a patient has hearing loss.
 
@@ -20,6 +20,7 @@ Hearing loss is a common problem that affects millions of people. The diagnosis 
   - Random Forest
   - K-Nearest Neighbors 
   - Logistic Regression
+- Inclusion of cross validation
 - Hearing status prediction based on measured threshold
 
 ## Screenshots
@@ -31,16 +32,12 @@ Hearing loss is a common problem that affects millions of people. The diagnosis 
 ![Audiogram Output](images/audiogram.png)
 
 ## Next steps
-- Hyperparameter tuning with cross validation
-- Additional evaluation metrics for model selection
-- Search for an external dataset for testing
-- Improve data validation and robustness
-
+- Build a web application.
 
 ## Planned functions
+- Improvement of the machine learning system
 - Integrate a speech test, for example, the Freiburger one- and two-syllable test.
 - Build a level system for the game. The game mechanics are currently in the conceptual phase.
-- Build a web application.
 
 ## Installation
 The program runs on all major operating systems (Windows, macOS, Linux). Ensure that Python 3.10 or higher is installed before running the program.
@@ -100,6 +97,7 @@ Hörverlust ist ein zentrales Problem vieler Menschen. Die Diagnose dieser Funkt
   - Random Forest
   - K-Nearest Neighbors
   - Logistische Regression
+- Einbindung von Kreuzvalidierung
 - Hörstatus wird auf Basis des gemessenen Schwellwertes vorhergesagt
 
 ## Screenshots
@@ -110,15 +108,12 @@ Hörverlust ist ein zentrales Problem vieler Menschen. Die Diagnose dieser Funkt
 ![Audiogram Output](images/audiogramm.png)
 
 ## Nächste Schritte
-- Anpassung der Hyperparameter mittels Kreuzvalidierung
-- Zusätzliche Evaluation des Modells durch weitere Metriken
-- Suchen eines externen Datensatzes zum Testen des Modells
-- Verbesserung der Daten in den Punkten Integrität und Robustheit
+- Aufbau in einer Web-Applikation.
 
 ## Geplante Funktionen 
+- Verbesserung des Machine-Learning
 - Einbettung des Freiburger Ein- und Zweisilbertests. 
 - Implementierung eines Levelsystems für das Spiel. Spielmechaniken wie ein Levelsystem sind geplant, befinden sich jedoch noch in der Konzeptionsphase.
-- Aufbau in einer Web-Applikation.
 
 ## Installation
 Das Programm läuft auf allen gängigen Betriebssystemen. Zum Starten des Programms wird Python 3.10 oder eine höhere Version benötigt.
