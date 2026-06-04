@@ -1,1 +1,1 @@
-{"Model": "KNN", "Accuracy": 98.0}
+{"Model": "RandomForest", "Accuracy": 98.2}
